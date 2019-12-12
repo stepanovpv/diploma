@@ -1,0 +1,11 @@
+---
+systemd_service_disable:
+  - firewalld
+  - tuned
+
+systemd_service_enable:
+  - NetworkManager
+  - auditd
+  - crond
+  - rsyslog
+  - sshd

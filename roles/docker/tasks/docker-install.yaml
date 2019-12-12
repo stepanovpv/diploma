@@ -1,0 +1,25 @@
+---
+- name: Docker Yum Install
+  yum:
+    name: "{{ item }}"
+    state: installed
+    disable_gpg_check: yes
+  loop:
+    - "{{ docker_package }}"
+    - "{{ redhat_dependency_package }}"
+  when: ansible_os_family == "RedHat"
+  tags:
+    - docker-configuration
+
+- name: Docker Apt Install
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - "{{ docker_package }}"
+    - "{{ debian_dependency_package }}"
+  when: ansible_os_family == "Debian"
+  tags:
+    - docker-configuration
+

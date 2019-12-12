@@ -1,0 +1,37 @@
+---
+rpm_package_system:
+    - tmpwatch
+    - yum-utils
+    - json-c
+    - bash-completion
+    - bridge-utils
+    - bzip2
+    - gd
+    - mailx
+    - gnutls
+    - telnet
+    - iotop
+    - iperf
+    - iperf3
+    - traceroute
+    - tcpdump
+    - mc
+    - atop
+    - iftop
+    - strace
+    - wget
+    - net-tools
+    - mtr
+    - htop
+    - fping
+    - nmap
+    - nmap-ncat
+    - mlocate
+    - lynx
+    - pv
+    - screen
+    - ntsysv
+    - pciutils
+    - crontabs
+    - cronie
+    - cronie-anacron

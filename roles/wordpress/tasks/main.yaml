@@ -1,0 +1,2 @@
+---
+- import_tasks: wordpress-server-deploy.yaml

@@ -1,0 +1,26 @@
+---
+- name: Nginx Create Config Directory
+  file:
+    path: "{{ nginx_server_conf_d }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+  tags:
+    - nginx-configuration
+
+- name: Nginx Create Config File
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+    backup: no
+  loop:
+    - { src: "var/data/nginx/conf.d/wordpress.conf", dest: "{{ nginx_server_conf_d }}/wordpress.conf" }
+  notify: nginx-reload
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+  tags:
+    - nginx-configuration

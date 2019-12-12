@@ -1,0 +1,36 @@
+---
+- name: SELinux Configuration
+  template:
+    src: "{{ ansible_os_family }}/etc/selinux/config"
+    dest: /etc/selinux/config
+    owner: root
+    group: root
+    mode: 0644
+    backup: no
+  when: ansible_os_family == "RedHat"
+  tags:
+    - selinux-configuration
+
+- name: Sudoers Configuration
+  template:
+    src: "{{ ansible_os_family }}/etc/sudoers"
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: 0440
+    backup: yes
+    validate: '/usr/sbin/visudo -cf %s'
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+  tags:
+    - sudoers-configuration
+
+- name: TimeZone Configuration
+  file:
+    src: "../usr/share/zoneinfo/{{ time_zone }}"
+    dest: /etc/localtime
+    owner: root
+    group: root
+    state: link
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+  tags:
+    - timezone-configuration

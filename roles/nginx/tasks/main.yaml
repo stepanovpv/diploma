@@ -1,0 +1,3 @@
+---
+- import_tasks: nginx-server-setup.yaml
+- import_tasks: nginx-server-deploy.yaml

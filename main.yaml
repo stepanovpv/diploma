@@ -1,0 +1,23 @@
+---
+- hosts: all
+  roles:
+  - common
+  - docker
+  tags: basic-preparation
+
+- hosts: Databases
+  vars:
+  vars_files:
+  - glob_vars/wordpress-global-vars.yaml
+  roles:
+  - mysql
+  tags: databases-server-preparation
+
+- hosts: Front
+  vars:
+  vars_files:
+  - glob_vars/wordpress-global-vars.yaml
+  roles:
+  - wordpress
+  - nginx
+  tags: front-server-preparation

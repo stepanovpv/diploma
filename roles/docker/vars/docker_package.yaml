@@ -1,0 +1,17 @@
+---
+docker_package:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+redhat_dependency_package:
+    - python-docker-py
+
+debian_dependency_package:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+    - python-docker
+    - python-dockerpty

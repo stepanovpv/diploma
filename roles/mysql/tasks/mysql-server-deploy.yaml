@@ -1,0 +1,21 @@
+---
+- name: Mysql Server Docker Container Deploy
+  docker_container:
+    name: "{{ mysql_server_container_name }}"
+    hostname: "{{ ansible_nodename }}"
+    image: "{{ mysql_server_image }}:{{ mysql_server_tag }}"
+    restart_policy: always
+    restart: "{{ mysql_server_restart }}"
+    network_mode: "{{ mysql_server_network_mode }}"
+    volumes: "{{ mysql_server_bind_mounts }}"
+    ulimits: "{{ mysql_server_ulimits }}"
+    log_driver: "{{ mysql_server_log_driver }}"
+    log_options: "{{ mysql_server_log_options }}"
+    env:
+      MYSQL_ROOT_PASSWORD: "{{ mysql_root_password }}"
+      MYSQL_DATABASE: "{{ mysql_databases }}"
+      MYSQL_USER: "{{ mysql_user }}"
+      MYSQL_PASSWORD: "{{ mysql_password }}"
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+  tags:
+    - mysql-configuration
