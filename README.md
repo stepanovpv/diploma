@@ -1,6 +1,6 @@
 ## Системные требования
 
-`ansible version`: 2.7.8
+`ansible version`: 2.9
 
 `os-release`: "CentOS Linux 7", "Ubuntu 18.04.3 LTS"
 
