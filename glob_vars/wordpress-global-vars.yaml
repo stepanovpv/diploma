@@ -1,0 +1,7 @@
+---
+wordpress_volume: "wordpress"
+wordpress_php_fpm_host: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+mysql_host: "{{ hostvars['db']['ansible_default_ipv4']['address'] }}"
+mysql_databases: "wordpress"
+mysql_user: "wordpress"
+mysql_password: "BlGcub32hsDe0OjBt2GTskZ5"

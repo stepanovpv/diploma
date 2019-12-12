@@ -1,0 +1,18 @@
+---
+wordpress_server_image: wordpress
+wordpress_server_tag: php7.3-fpm-alpine
+wordpress_server_restart: no
+wordpress_server_networks: []
+wordpress_server_network_mode: host
+wordpress_server_container_name: "wordpress"
+wordpress_server_bind_mounts:
+  - "wordpress:/var/www/html"
+wordpress_server_ulimits:
+  - "nofile:262144:262144"
+wordpress_server_published_ports: []
+  # - "9000"
+wordpress_server_exposed_ports: []
+  # - "9000"
+wordpress_server_log_driver: json-file
+wordpress_server_log_options:
+wordpress_server_purge_networks: no

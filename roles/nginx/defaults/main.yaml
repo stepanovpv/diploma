@@ -1,0 +1,20 @@
+---
+nginx_server_image: nginx
+nginx_server_tag: alpine
+nginx_server_restart: no
+nginx_server_networks: []
+nginx_server_network_mode: host
+nginx_server_container_name: "nginx"
+nginx_server_conf_d: "/var/data/nginx/conf.d/"
+nginx_server_bind_mounts:
+  - "{{ nginx_server_conf_d }}:/etc/nginx/conf.d/"
+  - "{{ wordpress_volume }}:/var/www/html"
+nginx_server_ulimits:
+  - "nofile:262144:262144"
+nginx_server_published_ports: []
+  # - "80"
+nginx_server_exposed_ports: []
+  # - "80"
+nginx_server_log_driver: json-file
+nginx_server_log_options:
+nginx_server_purge_networks: no

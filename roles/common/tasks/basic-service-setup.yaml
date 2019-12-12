@@ -1,0 +1,32 @@
+---
+- name: Include Service List CentOS
+  include_vars: redhat_systemd-config.yaml
+  when: ansible_os_family == "RedHat"
+  tags:
+    - service-default-configuration
+
+- name: Include Service List Debian
+  include_vars: debian_systemd-config.yaml
+  when: ansible_os_family == "Debian"
+  tags:
+    - service-default-configuration
+
+- name: Service Disable
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  loop: "{{ systemd_service_disable }}"
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+  tags:
+    - service-default-configuration
+
+- name: Service Enable
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop: "{{ systemd_service_enable }}"
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
+  tags:
+    - service-default-configuration

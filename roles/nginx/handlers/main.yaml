@@ -1,0 +1,2 @@
+---
+- import_tasks: nginx-reload_handlers.yaml
