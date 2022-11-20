@@ -48,7 +48,7 @@ deploy-job:      # This job runs in the deploy stage.
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
-    - sh .ci-notify.sh ✅
+    - sh ci-notify.sh ✅
 
 notify_error:
   stage: notify
