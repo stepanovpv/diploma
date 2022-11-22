@@ -10,3 +10,6 @@ db_name: "db"
 # Username and password for admin of database
 user_name: "user"
 user_pass: "pass"
+
+# Setting remote permissions for user
+remote_host_ip: "%"

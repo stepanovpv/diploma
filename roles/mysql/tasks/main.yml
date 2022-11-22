@@ -65,6 +65,7 @@
     name: "{{ user_name }}"
     password: "{{ user_pass }}"
     priv: "{{ db_name }}.*:ALL"
+    host: "{{ remote_host_ip }}"
     state: present
     login_user: root
     login_password: "{{ root_password }}"
