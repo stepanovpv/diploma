@@ -1,6 +1,0 @@
----
-- name: nginx-reload
-  shell: docker exec {{ nginx_server_container_name }} nginx -s reload
-  when: ansible_os_family == "RedHat" or ansible_os_family == "Debian"
-  tags:
-    - nginx-configuration
