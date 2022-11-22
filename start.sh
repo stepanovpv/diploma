@@ -1,7 +1,5 @@
 #!/bin/bash
 
+inventory=/home/deploy/ansible-wordpress/inventory/hosts.ini
 
-inventory=/home/pavel/wp-mysql-nginx-php/inventory/hosts.ini
-
-
-ansible-playbook playbook.yml -i $inventory -kK --ask-vault-pass -u pavel -vv "$@"
+ansible-playbook playbook.yml -i $inventory -kK --ask-vault-pass -u deploy -vv "$@"
