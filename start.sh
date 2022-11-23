@@ -2,4 +2,4 @@
 
 inventory=/home/deploy/ansible-wordpress/inventory/hosts.ini
 
-ansible-playbook playbook.yml -i $inventory -kK --ask-vault-pass -u deploy -vv "$@"
+ansible-playbook playbook.yml -i $inventory -kK -u deploy -vv "$@"
