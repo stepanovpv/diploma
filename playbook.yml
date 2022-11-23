@@ -1,9 +1,7 @@
 ---
 - name: Add apps
   hosts: app
-  become: true
-  vars_files:
-    - vars/wordpress_vault.yml    
+  become: true 
   roles:   
     - { role: apache, tags: [apache, apps] }
     - { role: php,  tags: [php, apps] }
