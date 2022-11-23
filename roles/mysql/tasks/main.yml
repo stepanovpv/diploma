@@ -18,6 +18,14 @@
     executable: pip3
   tags: [ mysql ]
 
+- name: Reconfigure MySQL Server to listen for external connections
+  lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: '^bind-address\s+='
+    line: 'bind-address = 0.0.0.0'
+    insertafter: '^\[mysqld\]'
+    state: present
+
 - name: Started mysql
   service:
     name: mysql
