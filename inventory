@@ -1,6 +1,0 @@
-[Front]
-front1 ansible_connection=ssh ansible_host=127.0.0.1  ansible_port=22 ansible_user=user
-front2 ansible_connection=ssh ansible_host=127.0.0.1  ansible_port=22 ansible_user=user
-
-[Databases]
-db ansible_connection=ssh ansible_host=127.0.0.1 ansible_port=22 ansible_user=user
