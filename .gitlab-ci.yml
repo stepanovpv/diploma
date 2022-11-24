@@ -1,5 +1,9 @@
 image: http://registry.gitlab.com/newbie_devops/ansible-wordpress:latest
 
+default:
+  tags:
+    - ndevops
+
 stages:
   - test
   - deploy
