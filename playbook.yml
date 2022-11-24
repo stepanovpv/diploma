@@ -1,13 +1,13 @@
 ---
 - name: Add apps
-  hosts: app
+  hosts: hosts_apps
   become: true
   roles:
     - { role: apache, tags: [apache, apps] }
     - { role: php,  tags: [php, apps] }
     - { role: wordpress, tags: [wp, apps] }
 - name: Add apps
-  hosts: base
+  hosts: host_mysql
   become: true
   roles:
     - { role: mysql, tags: [mysql, apps] }
