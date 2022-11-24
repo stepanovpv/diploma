@@ -1,4 +1,0 @@
----
-- import_tasks: basic-system-preparation.yaml
-- import_tasks: basic-package-install.yaml
-- import_tasks: basic-service-setup.yaml

@@ -1,5 +1,0 @@
----
-- import_tasks: docker-include-vars.yaml
-- import_tasks: docker-repository-setup.yaml
-- import_tasks: docker-install.yaml
-- import_tasks: docker-enable-service.yaml
