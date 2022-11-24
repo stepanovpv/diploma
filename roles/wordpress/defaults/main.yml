@@ -1,0 +1,15 @@
+---
+# defaults file for ansible-role-mysql
+
+# Password for root user
+root_password: "root"
+
+# Database name which will be created
+mysql_db: "db"
+
+# Username and password for admin of database
+mysql_user: "user"
+mysql_password: "pass"
+
+# Setting remote permissions for user
+remote_host_ip: "192.168.10.115"

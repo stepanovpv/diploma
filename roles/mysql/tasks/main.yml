@@ -25,6 +25,14 @@
     line: 'bind-address = 0.0.0.0'
     insertafter: '^\[mysqld\]'
     state: present
+    
+- name: Reconfigure MySQL Server to listen for external connections
+  lineinfile:    
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: '^mysqlx-bind-address\s+='
+    line: 'mysqlx-bind-address = 0.0.0.0'
+    insertafter: '^\[mysqld\]'
+    state: present
 
 - name: Started mysql
   service:
@@ -79,3 +87,20 @@
     login_password: "{{ root_password }}"
   no_log: true
   tags: [ mysql ]
+- name: Stop and start mysql service
+  block:
+    - name: Stop mysql
+      service:
+        name: mysql
+        state: stopped
+
+    - name: Wait until the lock file is removed
+      wait_for:
+        path: /var/lock/subsys/mysql
+        state: absent
+
+    - name: Start mysql
+      service:
+        name: mysql
+        state: started
+  become: true
