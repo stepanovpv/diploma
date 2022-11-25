@@ -23,7 +23,7 @@ ansible-test:
     - ls -la
     - lsb_release -a
     - pwd
-    - ansible-playbook --private-key ansible.key -i inventory/hosts -u ubuntu playbook.yml
+    - ansible-playbook --private-key ansible.key -i inventory/hosts.ini -u ubuntu playbook.yml
   tags:
     - ndevops
 
