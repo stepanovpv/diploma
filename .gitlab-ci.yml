@@ -23,6 +23,7 @@ deploy-job:      # This job runs in the deploy stage.
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "lsb_release -a"
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "pwd"
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "rm -rf git"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "mkdir git"
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "cd git"
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "git clone https://DEPLOY:$DEPLOY_TOKEN@gitlab.com/newbie_devops/ansible-wordpress.git"
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "cd ansible-wordpress"
