@@ -27,7 +27,7 @@ deploy-job:      # This job runs in the deploy stage.
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "cd git"
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "git clone https://DEPLOY:$DEPLOY_TOKEN@gitlab.com/newbie_devops/ansible-wordpress.git git"
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "cd git && git checkout $CI_COMMIT_BRANCH"
-    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "cd git && ansible-playbook -i inventory/hosts.ini playbook.yml"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "cd git && ansible-playbook -i /home/deploy/git/inventory/hosts.ini playbook.yml"
     - sh ci-notify.sh ✅
 
   tags:
