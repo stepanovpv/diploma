@@ -1,47 +1,33 @@
-image: http://registry.gitlab.com/newbie_devops/ansible-wordpress:latest
-
-default:
-  tags:
-    - ndevops
 
 stages:
   - test
   - deploy
   - notify
-  
-before_script:
-  - ansible --version
-  - ansible-lint --version
-  - echo "$ANSIBLE_SSHKEY" > ansible.key ## Записываем ключ
-  - chmod 400 ansible.key
-  - export ANSIBLE_HOST_KEY_CHECKING=False
 
 ansible-test:
   stage: test
   script:
-    - ansible --version
-    - ls -la
-    - lsb_release -a
-    - pwd
-    - ansible-playbook --private-key ansible.key -i inventory/hosts.ini -u ubuntu playbook.yml
-  tags:
-    - ndevops
+    - echo "Test application..."
+    - echo "Application successfully deployed."
 
 deploy-job:      # This job runs in the deploy stage.
+  image: alpine:latest
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   environment: production
   script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - chmod og= $VK_KEY
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "ansible --version"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "ls -la"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "lsb_release -a"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "pwd"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "ansible-playbook -i inventory/hosts.ini playbook.yml"
     - sh ci-notify.sh ✅
-  tags:
-    - ndevops
 
 notify_error:
   stage: notify
   script:
   - sh ci-notify.sh ❌
   when: on_failure # Уведомление при ошибке деплоя
-  tags:
-    - ndevops
+  # tags:
+    # - ndevops
 
