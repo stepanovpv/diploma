@@ -9,6 +9,8 @@ ansible-test:
   script:
     - echo "Test application..."
     - echo "Application successfully deployed."
+  tags:
+    - ndevops
 
 deploy-job:      # This job runs in the deploy stage.
   image: alpine:latest
@@ -22,12 +24,14 @@ deploy-job:      # This job runs in the deploy stage.
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "pwd"
     - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "ansible-playbook -i inventory/hosts.ini playbook.yml"
     - sh ci-notify.sh ✅
+  tags:
+    - ndevops
 
 notify_error:
   stage: notify
   script:
   - sh ci-notify.sh ❌
   when: on_failure # Уведомление при ошибке деплоя
-  # tags:
-    # - ndevops
+  tags:
+    - ndevops
 
