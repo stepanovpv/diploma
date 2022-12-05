@@ -1,0 +1,43 @@
+
+stages:
+  - test
+  - deploy
+  - notify
+
+ansible-test:
+  stage: test
+  script:
+    - echo "Test application..."
+    - echo "Application successfully deployed."
+  tags:
+    - ndevops
+
+deploy-job:      # This job runs in the deploy stage.
+  image: alpine:latest
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  environment: production
+  script:
+    - chmod og= $VK_KEY
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "ansible --version"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "ls -la"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "lsb_release -a"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "pwd"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "rm -rf git"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "mkdir git"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "cd git"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "git clone https://DEPLOY:$DEPLOY_TOKEN@gitlab.com/newbie_devops/ansible-wordpress.git git"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "cd git && git checkout $CI_COMMIT_BRANCH"
+    - ssh -i $VK_KEY -o StrictHostKeyChecking=no deploy@37.139.42.198 "cd git && ansible-playbook -i /home/deploy/git/inventory/hosts.ini playbook.yml"
+    - sh ci-notify.sh ✅
+
+  tags:
+    - ndevops
+
+notify_error:
+  stage: notify
+  script:
+  - sh ci-notify.sh ❌
+  when: on_failure # Уведомление при ошибке деплоя
+  tags:
+    - ndevops
+
